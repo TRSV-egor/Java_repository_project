@@ -1,12 +1,26 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class main {
     public static void main(String[] args) {
-        String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
-        String digits = text.replaceAll("[^0-9 рубл .]", "");
-        System.out.println(digits);
+
     }
 }
+
+//Задание 4.5задание 1
+//class main {
+//    public static void main(String[] args) {
+//        String text = "Вася заработал 5000 рублей, Петя - 7563 рубля, а Маша - 30000 рублей";
+//        Pattern pattern = Pattern.compile("\\d+");
+//        Matcher matcher = pattern.matcher(text);
+//        double sum = 0;
+//        while (matcher.find()){
+//            sum += Integer.parseInt(text.substring(matcher.start(), matcher.end()));
+//        }
+//        System.out.println("Итого: " + sum);
+//    }
+//}
 
 //домашнее задание 4.4 упражнение 5*
 //public class main {
