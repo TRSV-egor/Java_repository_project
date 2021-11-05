@@ -2,41 +2,41 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class main{
-    public static void main(String[] args) {
-//        System.out.println("Enter phone number: ");
-//        String line = (new Scanner(System.in).nextLine());
+// class main{
+//     public static void main(String[] args) {
+// //        System.out.println("Enter phone number: ");
+// //        String line = (new Scanner(System.in).nextLine());
 
-        String line = "+7 909 123-45-67";
-        Long phone = Long.parseLong(line.replaceAll("[^0-9]", ""));
-        System.out.println(phone);
+//         String line = "+7 909 123-45-67";
+//         Long phone = Long.parseLong(line.replaceAll("[^0-9]", ""));
+//         System.out.println(phone);
 
 
-    }
-}
+//     }
+// }
 
 
 //ДЗ 4.5 задание 3
-//class main {
-//    public static void main(String[] args) {
-//
-//
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("Введите ФИО:");
-//        String line = scanner.nextLine();
-//
-//        String massive[] = line.split("\\s");
-//
-//        String firstName = massive[0];
-//        String lastName = massive [1];
-//        String patronymic = massive [2];
-//
-//        System.out.println("Фамилия " + firstName + "\nИмя " + lastName + "\nОтчество " + patronymic);
-//
-//
-//
-//    }
-//}
+class main {
+   public static void main(String[] args) {
+
+
+       Scanner scanner = new Scanner(System.in);
+       System.out.print("Введите ФИО:");
+       String line = scanner.nextLine();
+
+       String massive[] = line.split("\\s");
+
+       String firstName = massive[0];
+       String lastName = massive [1];
+       String patronymic = massive [2];
+
+       System.out.println("Фамилия " + firstName + "\nИмя " + lastName + "\nОтчество " + patronymic);
+
+
+
+   }
+}
 
 
 
