@@ -6,29 +6,61 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class main{
-    public static void main(String[] args) {
-        int day = 19;
-        int month = 7;
-        int year = 1997;
-
-        Calendar calendar = Calendar.getInstance();
-        // System.out.println(calendar.getWeekYear());
-        // calendar.set(year, month, day);
-        // System.out.println(calendar.getTime());
-        System.out.println(calendar.getWeekYear() - year);
-        // calendar.add(calendar.YEAR, 1);
-        // System.out.println(calendar.getWeekYear());
+         public static void main(String[] args) {
+             String line = "Каждый охотник желает знать, где сидит фазан";
+             System.out.println(line);
+             String[] words = line.split("\\s");
+                
+                for (int i=0;i < words.length;i++){
+                        System.out.println(i + " " + words[i]);
+                }
         
-        int age = calendar.getWeekYear() - year;
-        DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy - EEE");
+             String temp = "";   
 
-        for (int i = 0; i <= age; i++){
-            calendar.set(year, month, day); 
-            calendar.add(calendar.YEAR, i);
-            System.out.println(i + " - " + dateFormat.format(calendar.getTime()));
+             for (int index = 0; index < (words.length-1)/2; index++){
+                
+                int lastIndex = (words.length-1)-index;
+
+                System.out.println("Начальный индекс " + index + " конечный индекс " + lastIndex);
+
+                temp = words[index];
+                words[index] = words[lastIndex];
+                words[lastIndex] = temp;
+                
+             }
+             
+             for (int i=0;i < words.length;i++){
+                System.out.println(words[i]);
         }
-    }
-}
+         }
+        }
+
+
+//ДЗ 4.6 задание 1
+// class main{
+//     public static void main(String[] args) {
+//         int day = 19;
+//         int month = 7;
+//         int year = 1997;
+
+//         Calendar calendar = Calendar.getInstance();
+//         // System.out.println(calendar.getWeekYear());
+//         // calendar.set(year, month, day);
+//         // System.out.println(calendar.getTime());
+//         System.out.println(calendar.getWeekYear() - year);
+//         // calendar.add(calendar.YEAR, 1);
+//         // System.out.println(calendar.getWeekYear());
+        
+//         int age = calendar.getWeekYear() - year;
+//         DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy - EEE");
+
+//         for (int i = 0; i <= age; i++){
+//             calendar.set(year, month, day); 
+//             calendar.add(calendar.YEAR, i);
+//             System.out.println(i + " - " + dateFormat.format(calendar.getTime()));
+//         }
+//     }
+// }
 
 //ДЗ 4.5 задание со звёздочкой
 // public class main {
