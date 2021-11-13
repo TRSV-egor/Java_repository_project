@@ -1,39 +1,96 @@
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class main{
-         public static void main(String[] args) {
-             String line = "Каждый охотник желает знать, где сидит фазан";
-             System.out.println(line);
-             String[] words = line.split("\\s");
+class Main {
+	public static void main(String[] args) {
+
+                final int patientsCount = 30;
+
+                final double highTempPatients = 40.0;
                 
-                for (int i=0;i < words.length;i++){
-                        System.out.println(i + " " + words[i]);
-                }
+                final double lowTempPatients = 32.0;
+
+                final double lowTemp = 36.2;
+
+                final double highTemp = 36.9;
+
+                float sumTemp = 0;
+
+                int goodTemp = 0;
+
+		float[] patientsTemp = new float[patientsCount];
+
+                DecimalFormat df = new DecimalFormat("##.#");
+                
+                System.out.print("Температура пациентов: ");
+
+		for (int i = 0; i < patientsTemp.length; i++){
+			
+			float number;
+			
+			while (true){
+				number =  (float) Math.random() * 100;
+				if (number < highTempPatients & number > lowTempPatients){
+					break;
+					} else { 
+					continue;
+					}
+				}
+			
+			sumTemp += number;
+			patientsTemp[i]= number;
+
+                        if( number >= lowTemp & number <= highTemp){
+                                
+                                goodTemp ++;                
+                        }
+
+			System.out.print(" " +  df.format(patientsTemp[i]) );
+			}
+                System.out.println();
+                System.out.println("Средняя температура пациентов " + df.format(sumTemp/ patientsTemp.length));
+                System.out.println("Здоровых пациентов " + goodTemp);
+
+
+	}
+}
+
+
+//ДЗ 5.1 задание 1
+// class main{
+//          public static void main(String[] args) {
+//              String line = "Каждый охотник желает знать, где сидит фазан";
+//              System.out.println(line);
+//              String[] words = line.split("\\s");
+                
+//                 for (int i=0;i < words.length;i++){
+//                         System.out.println(i + " " + words[i]);
+//                 }
         
-             String temp = "";   
+//              String temp = "";   
 
-             for (int index = 0; index < (words.length-1)/2; index++){
+//              for (int index = 0; index < (words.length-1)/2; index++){
                 
-                int lastIndex = (words.length-1)-index;
+//                 int lastIndex = (words.length-1)-index;
 
-                System.out.println("Начальный индекс " + index + " конечный индекс " + lastIndex);
+//                 System.out.println("Начальный индекс " + index + " конечный индекс " + lastIndex);
 
-                temp = words[index];
-                words[index] = words[lastIndex];
-                words[lastIndex] = temp;
+//                 temp = words[index];
+//                 words[index] = words[lastIndex];
+//                 words[lastIndex] = temp;
                 
-             }
+//              }
              
-             for (int i=0;i < words.length;i++){
-                System.out.println(words[i]);
-        }
-         }
-        }
+//              for (int i=0;i < words.length;i++){
+//                 System.out.println(words[i]);
+//         }
+//          }
+//         }
 
 
 //ДЗ 4.6 задание 1
