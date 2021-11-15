@@ -6,59 +6,91 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class Main {
+class main {
 	public static void main(String[] args) {
+		String[][] theX = {
+			{"x", " ", " ", " ", " ", " ", "x"},
+			{" ", "x", " ", " ", " ", "x", " "},
+			{" ", " ", "x", " ", "x", " ", " "},
+			{" ", " ", " ", "x", " ", " ", " "},
+			{" ", " ", "x", " ", "x", " ", " "},
+			{" ", "x", " ", " ", " ", "x", " "},
+			{"x", " ", " ", " ", " ", " ", "x"},
+		};
 
-                final int patientsCount = 30;
 
-                final double highTempPatients = 40.0;
-                
-                final double lowTempPatients = 32.0;
+	for (int i=0; i < theX.length; i++){
 
-                final double lowTemp = 36.2;
-
-                final double highTemp = 36.9;
-
-                float sumTemp = 0;
-
-                int goodTemp = 0;
-
-		float[] patientsTemp = new float[patientsCount];
-
-                DecimalFormat df = new DecimalFormat("##.#");
-                
-                System.out.print("Температура пациентов: ");
-
-		for (int i = 0; i < patientsTemp.length; i++){
+		for (int j = 0; j < theX[i].length; j++){
 			
-			float number;
-			
-			while (true){
-				number =  (float) Math.random() * 100;
-				if (number < highTempPatients & number > lowTempPatients){
-					break;
-					} else { 
-					continue;
-					}
-				}
-			
-			sumTemp += number;
-			patientsTemp[i]= number;
-
-                        if( number >= lowTemp & number <= highTemp){
-                                
-                                goodTemp ++;                
-                        }
-
-			System.out.print(" " +  df.format(patientsTemp[i]) );
+			if (j == theX[i].length-1){
+				System.out.println(theX[i][j]);
+			} else {
+				System.out.print(theX[i][j]);
 			}
-                System.out.println();
-                System.out.println("Средняя температура пациентов " + df.format(sumTemp/ patientsTemp.length));
-                System.out.println("Здоровых пациентов " + goodTemp);
-
+			
+		}
 
 	}
+		
+	}
+	
 }
+
+//ДЗ 5.1 задание 2
+// class Main {
+// 	public static void main(String[] args) {
+
+//                 final int patientsCount = 30;
+
+//                 final double highTempPatients = 40.0;
+                
+//                 final double lowTempPatients = 32.0;
+
+//                 final double lowTemp = 36.2;
+
+//                 final double highTemp = 36.9;
+
+//                 float sumTemp = 0;
+
+//                 int goodTemp = 0;
+
+// 		float[] patientsTemp = new float[patientsCount];
+
+//                 DecimalFormat df = new DecimalFormat("##.#");
+                
+//                 System.out.print("Температура пациентов: ");
+
+// 		for (int i = 0; i < patientsTemp.length; i++){
+			
+// 			float number;
+			
+// 			while (true){
+// 				number =  (float) Math.random() * 100;
+// 				if (number < highTempPatients & number > lowTempPatients){
+// 					break;
+// 					} else { 
+// 					continue;
+// 					}
+// 				}
+			
+// 			sumTemp += number;
+// 			patientsTemp[i]= number;
+
+//                         if( number >= lowTemp & number <= highTemp){
+                                
+//                                 goodTemp ++;                
+//                         }
+
+// 			System.out.print(" " +  df.format(patientsTemp[i]) );
+// 			}
+//                 System.out.println();
+//                 System.out.println("Средняя температура пациентов " + df.format(sumTemp/ patientsTemp.length));
+//                 System.out.println("Здоровых пациентов " + goodTemp);
+
+
+// 	}
+// }
 
 
 //ДЗ 5.1 задание 1
