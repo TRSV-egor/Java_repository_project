@@ -13,23 +13,21 @@ class main {
 		// Создается новый список
 		ArrayList<String> ToDo = new ArrayList<>();
 
+		//Первоначальный вывод help
+		help();
+
 		// Цикл программы
 		while (true) {
 
 			// Главное меню
-			System.out.println(
-				"LIST — выводит дела с их порядковыми номерами" +
-				"\nADD — добавляет дело или на определённое место если указать номер," +
-				"\nEDIT — заменяет дело с указанным номером," +
-				"\nDELETE — удаляет, " +
-				"\nEXIT - выход");
+
 			System.out.print("Enter the command: ");
 
 			// Инициализация ввода из терминала
 			Scanner scanner = new Scanner(System.in);
 			String value = scanner.nextLine();
 
-			// Ввели LIST, проверяем в начали ли команда
+			// Ввели LIST, проверяем в начале ли команда
 			if (value.contains("LIST") & value.indexOf("LIST") == 0) {
 
 				// Проверяем не пустой ли список
@@ -48,19 +46,19 @@ class main {
 				// Обратно в меню
 				continue;
 
-				// Ввели ADD, проверяем в начали ли команда
+				// Ввели ADD, проверяем в начале ли команда
 			} else if (value.contains("ADD") & value.indexOf("ADD") == 0) {
 
 				// Убираем ADD и пробел
 				value = value.replaceAll("ADD?\\s+", "");
 
-				System.out.println(value.charAt(0) == '?\\n');
+				System.out.println(Integer.parseInt(value.substring(0,2)));
 
 				ToDo.add(value);
 
 				// Обратно в меню
 				continue;
-				//Введи DELETE, проверяем в начали ли команда
+				//Введи DELETE, проверяем в начале ли команда
 			} else if (value.contains("DELETE") & value.indexOf("DELETE") == 0) {
 
 				// Убираем DELETE и пробел
@@ -70,13 +68,26 @@ class main {
 				// Обратно в меню
 				continue;
 
-				// Ввели EXIT, проверяем в начали ли команда
+				//Вызов помощи
+			} else if ((value.contains("help") & value.indexOf("help") == 0)){
+				help();
+
+				// Ввели EXIT, проверяем в начале ли команда
 			} else if (value.contains("EXIT") & value.indexOf("EXIT") == 0) {
 				System.out.println("Bye!");
 				// Прерывания цикла while, конец работы программы
 				break;
 			}
 		}
+	}
+
+	static void help(){
+		System.out.println(
+				"LIST — выводит дела с их порядковыми номерами" +
+						"\nADD — добавляет дело или на определённое место если указать номер," +
+						"\nEDIT — заменяет дело с указанным номером," +
+						"\nDELETE — удаляет, " +
+						"\nEXIT - выход");
 	}
 }
 
