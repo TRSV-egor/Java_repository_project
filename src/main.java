@@ -3,138 +3,197 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class main {
+class main{
+
+	static void help() {
+		System.out.println("LIST — выводит список email'ов" + "\nADD example@exp.net — добавление email");
+	}
+
+	static String stringConvert(String value){
+		
+		value = value.replaceFirst("ADD ", "");
+		System.out.println(value);
+		
+		return value;
+	}
+
 	public static void main(String[] args) {
+		
+		//Create email base
+		HashSet<String> eBase = new HashSet<>();
 
-		// Создается новый список
-		ArrayList<String> ToDo = new ArrayList<>();
-
-		//Первоначальный вывод help
+		//Showing help
 		help();
 
-		// Цикл программы
-		while (true) {
-
-			// Главное меню
-
-			System.out.print("Enter the command: ");
-
-			// Инициализация ввода из терминала
-			Scanner scanner = new Scanner(System.in);
-			String value = scanner.nextLine();
-
-			// Ввели LIST, проверяем в начале ли команда
-			if (value.contains("LIST") & value.indexOf("LIST") == 0) {
-
-				// Проверяем не пустой ли список
-				if (ToDo.size() == 0) {
-					System.out.println("Ваш список задач пуст :( ");
-					continue;
-				}
-
-				// Читаем список
-				for (int i = 0; i < ToDo.size(); i++) {
-					// Добавляем к индексу +1 для удобства пользователя
-					int number = i + 1;
-					System.out.println(number + ") " + ToDo.get(i));
-				};
-
-				// Обратно в меню
+		Scanner scanner = new Scanner(System.in);
+		String email = "";
+		
+		//Основной цикл программы
+		while (true){
+			
+			//Get command from user
+			email = scanner.nextLine();
+			
+			if (email.contains("ADD") & email.indexOf("ADD") == 0){
+				email = stringConvert(email);
+				eBase.add(email);
 				continue;
-
-				// Ввели ADD, проверяем в начале ли команда
-			} else if (value.contains("ADD") & value.indexOf("ADD") == 0) {
-
-				String[] obtained = commandWithIndex("ADD", value);
-
-				//Проверяем наличие введенного индекса
-				if (obtained[0].isEmpty()){
-					ToDo.add(obtained[1]);
+			} else if (email.contains("LIST")& email.length() == 4){
+				
+				if (eBase.size() == 0){
+					System.out.println("The eBase is empty");
 				} else {
-					if (Integer.parseInt(obtained[0]) > ToDo.size()){
-						ToDo.add(obtained[1]);
-						System.out.println("ADDED TO THE END");
-					} else {
-						ToDo.add(Integer.parseInt(obtained[0])-1, obtained[1]);
-						System.out.println("ADDED TO THE NUMBER");
+					for(String currentEmail : eBase){
+						System.out.println(currentEmail);
 					}
-
 				}
-
-
-				// Обратно в меню
-				continue;
-				//Введи DELETE, проверяем в начале ли команда
-			} else if (value.contains("DELETE") & value.indexOf("DELETE") == 0) {
-
-				// Убираем DELETE и пробел
-				value = value.replaceAll("DELETE?\\s+", "");
-				ToDo.remove(Integer.parseInt(value) - 1);
-
-				// Обратно в меню
 				continue;
 
-				//Вызов помощи
-			} else if ((value.contains("help") & value.indexOf("help") == 0)){
+			} else if (email.contains("help")& email.length() == 4){
 				help();
-
-				// Ввели EDIT, проверяем в начале ли команда
-			} else if (value.contains("EDIT") & value.indexOf("EDIT") == 0){
-
-				String obtaied[] = commandWithIndex("EDIT", value);
-
-				ToDo.set(Integer.parseInt(obtaied[0])-1, obtaied[1]);
-
-				// Обратно в меню
+			} else{
+				System.out.println("What? I don't understand...");
 				continue;
-
-				// Ввели EXIT, проверяем в начале ли команда
-			} else if (value.contains("EXIT") & value.indexOf("EXIT") == 0) {
-				System.out.println("Bye!");
-				// Прерывания цикла while, конец работы программы
-				break;
 			}
 		}
-	}
 
-	static String[] commandWithIndex(String commandType, String value){
-
-		String[] toSent = new String[2];
-
-		//Ищем конструкцию commandType + пробел + число? + пробел?
-		Pattern pattern = Pattern.compile("%s \\d*\\s*".formatted(commandType));
-		String command = "";
-		Matcher matcher = pattern.matcher(value);
-		while (matcher.find()) {
-			int start=matcher.start();
-			int end=matcher.end();
-			//Сохраняем полученные значения
-			command = value.substring(start,end);
-		}
-
-		// Убираем что нашли, задание для добавления готово
-		toSent[1] = value.replaceAll(command, "");
-
-
-		//Извлекаем индекс
-		toSent[0] = command.trim().replaceFirst("%s\\s*".formatted(commandType), "");
-
-		return toSent;
-	}
-
-	static void help(){
-		System.out.println(
-				"LIST — выводит дела с их порядковыми номерами" +
-						"\nADD — добавляет дело или на определённое место если указать номер," +
-						"\nEDIT — заменяет дело с указанным номером," +
-						"\nDELETE — удаляет, " +
-						"\nEXIT - выход");
 	}
 }
+	
+
+// class main {
+// 	public static void main(String[] args) {
+
+// 		// Создается новый список
+// 		ArrayList<String> ToDo = new ArrayList<>();
+
+// 		//Первоначальный вывод help
+// 		help();/
+
+// 		// Цикл программы
+// 		while (true) {
+
+// 			// Главное меню
+
+// 			System.out.print("Enter the command: ");
+
+// 			// Инициализация ввода из терминала
+// 			Scanner scanner = new Scanner(System.in);
+// 			String value = scanner.nextLine();
+
+// 			// Ввели LIST, проверяем в начале ли команда
+// 			if (value.contains("LIST") & value.indexOf("LIST") == 0) {
+
+// 				// Проверяем не пустой ли список
+// 				if (ToDo.size() == 0) {
+// 					System.out.println("Ваш список задач пуст :( ");
+// 					continue;
+// 				}
+
+// 				// Читаем список
+// 				for (int i = 0; i < ToDo.size(); i++) {
+// 					// Добавляем к индексу +1 для удобства пользователя
+// 					int number = i + 1;
+// 					System.out.println(number + ") " + ToDo.get(i));
+// 				};
+
+// 				// Обратно в меню
+// 				continue;
+
+// 				// Ввели ADD, проверяем в начале ли команда
+// 			} else if (value.contains("ADD") & value.indexOf("ADD") == 0) {
+
+// 				String[] obtained = commandWithIndex("ADD", value);
+
+// 				//Проверяем наличие введенного индекса
+// 				if (obtained[0].isEmpty()){
+// 					ToDo.add(obtained[1]);
+// 				} else {
+// 					if (Integer.parseInt(obtained[0]) > ToDo.size()){
+// 						ToDo.add(obtained[1]);
+// 						System.out.println("ADDED TO THE END");
+// 					} else {
+// 						ToDo.add(Integer.parseInt(obtained[0])-1, obtained[1]);
+// 						System.out.println("ADDED TO THE NUMBER");
+// 					}
+
+// 				}
+
+
+// 				// Обратно в меню
+// 				continue;
+// 				//Введи DELETE, проверяем в начале ли команда
+// 			} else if (value.contains("DELETE") & value.indexOf("DELETE") == 0) {
+
+// 				// Убираем DELETE и пробел
+// 				value = value.replaceAll("DELETE?\\s+", "");
+// 				ToDo.remove(Integer.parseInt(value) - 1);
+
+// 				// Обратно в меню
+// 				continue;
+
+// 				//Вызов помощи
+// 			} else if ((value.contains("help") & value.indexOf("help") == 0)){
+// 				help();
+
+// 				// Ввели EDIT, проверяем в начале ли команда
+// 			} else if (value.contains("EDIT") & value.indexOf("EDIT") == 0){
+
+// 				String obtaied[] = commandWithIndex("EDIT", value);
+
+// 				ToDo.set(Integer.parseInt(obtaied[0])-1, obtaied[1]);
+
+// 				// Обратно в меню
+// 				continue;
+
+// 				// Ввели EXIT, проверяем в начале ли команда
+// 			} else if (value.contains("EXIT") & value.indexOf("EXIT") == 0) {
+// 				System.out.println("Bye!");
+// 				// Прерывания цикла while, конец работы программы
+// 				break;
+// 			}
+// 		}
+// 	}
+
+// 	static String[] commandWithIndex(String commandType, String value){
+
+// 		String[] toSent = new String[2];
+
+// 		//Ищем конструкцию commandType + пробел + число? + пробел?
+// 		Pattern pattern = Pattern.compile("%s \\d*\\s*".formatted(commandType));
+// 		String command = "";
+// 		Matcher matcher = pattern.matcher(value);
+// 		while (matcher.find()) {
+// 			int start=matcher.start();
+// 			int end=matcher.end();
+// 			//Сохраняем полученные значения
+// 			command = value.substring(start,end);
+// 		}
+
+// 		// Убираем что нашли, задание для добавления готово
+// 		toSent[1] = value.replaceAll(command, "");
+
+
+// 		//Извлекаем индекс
+// 		toSent[0] = command.trim().replaceFirst("%s\\s*".formatted(commandType), "");
+
+// 		return toSent;
+// 	}
+
+// 	static void help(){
+// 		System.out.println(
+// 				"LIST — выводит дела с их порядковыми номерами" +
+// 						"\nADD — добавляет дело или на определённое место если указать номер," +
+// 						"\nEDIT — заменяет дело с указанным номером," +
+// 						"\nDELETE — удаляет, " +
+// 						"\nEXIT - выход");
+// 	}
+// }
 
 // ДЗ 5.1 задание 3
 // class main {
