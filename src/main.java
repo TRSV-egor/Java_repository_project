@@ -10,16 +10,36 @@ import java.util.regex.Pattern;
 
 class main{
 
+	//Выводит помощь
 	static void help() {
 		System.out.println("LIST — выводит список email'ов" + "\nADD example@exp.net — добавление email");
 	}
 
+	//Обрабатывает введенную пользователем строку, возвращает либо чистый емейл
+	// либо пустую строку если он не корректен
 	static String stringConvert(String value){
-		
+
+		//Регвыражения для проверки емейла
+		Pattern pattern = Pattern.compile("(\\S.*\\S)(@)(\\S.*\\S)(.\\S[a-z]{2,3})");
+
+		//Убираем ADD из строки
 		value = value.replaceFirst("ADD ", "");
-		System.out.println(value);
+
+		//Сопоставляем регвыр и строку
+		Matcher matcher = pattern.matcher(value);
+
+		//Проверяем что совпало по условию
+		if (matcher.matches()) {
+//			System.out.println("Full email: " + matcher.group(0));
+//			System.out.println("Username: " + matcher.group(1));
+//			System.out.println("Hosting Service: " + matcher.group(3));
+//			System.out.println("TLD: " + matcher.group(4));
+			return value;
+		} else {
+			return "";
+		}
 		
-		return value;
+
 	}
 
 	public static void main(String[] args) {
@@ -30,6 +50,7 @@ class main{
 		//Showing help
 		help();
 
+		//Инициализация сканера и строки введенной пользователем
 		Scanner scanner = new Scanner(System.in);
 		String email = "";
 		
@@ -37,12 +58,23 @@ class main{
 		while (true){
 			
 			//Get command from user
+			System.out.print("What do you want to do? ");
 			email = scanner.nextLine();
-			
-			if (email.contains("ADD") & email.indexOf("ADD") == 0){
+
+			//Если ввели ADD
+			if (email.contains("ADD ") & email.indexOf("ADD ") == 0){
 				email = stringConvert(email);
-				eBase.add(email);
+
+				if (email != ""){
+					System.out.println("Added " + email);
+					eBase.add(email);
+				} else {
+					System.out.println("E-mail incorrect");
+				}
+
 				continue;
+
+				//Если ввели LIST
 			} else if (email.contains("LIST")& email.length() == 4){
 				
 				if (eBase.size() == 0){
@@ -53,9 +85,10 @@ class main{
 					}
 				}
 				continue;
-
+				//Если ввели help
 			} else if (email.contains("help")& email.length() == 4){
 				help();
+				//Если ввели комманду отличную от ADD, LIST, help
 			} else{
 				System.out.println("What? I don't understand...");
 				continue;
@@ -65,7 +98,7 @@ class main{
 	}
 }
 	
-
+//HW5part2task1
 // class main {
 // 	public static void main(String[] args) {
 
