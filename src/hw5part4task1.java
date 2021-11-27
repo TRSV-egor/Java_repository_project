@@ -55,7 +55,7 @@ public class hw5part4task1 {
 
         while (true) {
             System.out.println("");
-            System.out.print("\tName or phone to add/find entry\n\tLIST - to show available entries \n What do you want to do: ");
+            System.out.print("\tName or phone to add/find entry\n\tLIST - to show available entries \n\n What do you want to do: ");
 
             String line = scanner.nextLine();
 
