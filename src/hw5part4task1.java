@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 
 public class hw5part4task1 {
 
+    //Print address book
     private static void printMap(Map<String, String> map) {
 
         if (map.isEmpty()) {
@@ -20,6 +21,7 @@ public class hw5part4task1 {
 
     }
 
+    //Formatting phone number to format 79876543210
     private static String formatPhone(String phone) {
 
         phone = phone.replaceAll("[^0-9]", "");
@@ -47,39 +49,45 @@ public class hw5part4task1 {
         return phone;
     }
 
-    private  static String searchByValue(Map map, String phone){
+    //Searching phone in TreeMap
+    private static String searchByValue(Map map, String phone) {
 
         String name = "";
 
         Set<Map.Entry<String, String>> entries = map.entrySet();
 
-        for( Map.Entry<String, String> entry : entries ){
+        for (Map.Entry<String, String> entry : entries) {
 
-            if(entry.getValue().equals(phone)){
+            if (entry.getValue().equals(phone)) {
                 //System.out.println("Key for value " + phone + " is: " + entry.getKey());
                 name = entry.getKey();
                 break;
             }
         }
 
-
         return name;
     }
 
 
     public static void main(String[] args) {
+
+        //Creating database of address book
         TreeMap<String, String> DB = new TreeMap<>();
+
         Scanner scanner = new Scanner(System.in);
+
+        //Initializing patterns to ubderstand users input
         Pattern patternNumber = Pattern.compile("\\+?[0-9]+");
         Pattern patternName = Pattern.compile("[A-Za-z]*|[А-Яа-я]*");
 
-
+        //program body
         while (true) {
             System.out.println("");
             System.out.print("\tName or phone to add/find entry\n\tLIST - to show available entries \n\n What do you want to do: ");
 
             String line = scanner.nextLine();
 
+            //Identiftificate users input (phone or name)
             Matcher matcherNumber = patternNumber.matcher(line);
             Matcher matcherName = patternName.matcher(line);
 
@@ -87,6 +95,7 @@ public class hw5part4task1 {
 
                 printMap(DB);
 
+                //if input is name
             } else if (matcherName.matches()) {
                 //System.out.println("This is name " + matcherName.group());
                 if (DB.containsKey(matcherName.group())) {
@@ -103,18 +112,14 @@ public class hw5part4task1 {
                         System.out.println("Notification: Entry created");
                     }
                 }
+
+                //if input is number
             } else if (matcherNumber.matches()) {
                 //System.out.println("This is phone " + matcherNumber.group());
                 line = formatPhone(line);
                 if (DB.containsValue(line)) {
-                    //
-                    //Have to search key by value
-                    //
                     String name = searchByValue(DB, line);
                     System.out.println(name + ": " + line);
-                    //
-                    //Result: null: 79101234567
-                    //
                 } else {
                     System.out.println("Notification: Enter name to number " + line);
                     String name = scanner.nextLine();
