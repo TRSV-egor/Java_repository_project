@@ -1,5 +1,6 @@
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -46,6 +47,26 @@ public class hw5part4task1 {
         return phone;
     }
 
+    private  static String searchByValue(Map map, String phone){
+
+        String name = "";
+
+        Set<Map.Entry<String, String>> entries = map.entrySet();
+
+        for( Map.Entry<String, String> entry : entries ){
+
+            if(entry.getValue().equals(phone)){
+                //System.out.println("Key for value " + phone + " is: " + entry.getKey());
+                name = entry.getKey();
+                break;
+            }
+        }
+
+
+        return name;
+    }
+
+
     public static void main(String[] args) {
         TreeMap<String, String> DB = new TreeMap<>();
         Scanner scanner = new Scanner(System.in);
@@ -89,7 +110,8 @@ public class hw5part4task1 {
                     //
                     //Have to search key by value
                     //
-                    System.out.println(DB.get(line) + ": " + line);
+                    String name = searchByValue(DB, line);
+                    System.out.println(name + ": " + line);
                     //
                     //Result: null: 79101234567
                     //
