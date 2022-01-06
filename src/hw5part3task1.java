@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class hw5part3task1 {
+public class  hw5part3task1 {
 
 	//Выводит помощь
 	static void help() {
